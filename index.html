@@ -42,13 +42,20 @@
       });
     });
 
+    async function highlight(e) {
+      e.style.fontWeight = 'bold';
+      await new Promise(r => setTimeout(r, 600));
+      e.style.fontWeight = 'normal';
+    }
+
     async function play(e) {
       const anchor = e.currentTarget;
-      anchor.style.fontWeight = 'bold';
-      anchor.firstChild.play();
-      console.log(`"${anchor.innerText}" played ${anchor.firstChild.src}`);
-      await new Promise(r => setTimeout(r, 600));
-      anchor.style.fontWeight = 'normal';
+      const audio = anchor.firstChild;
+      console.log(`"${anchor.innerText}" wants to play ${audio.src}`);
+      audio.play().then(
+        () => { highlight(anchor) }, // fulfilled
+        () => { console.log('playback error'); } // rejected
+      );
     }
   </script>
 </head>
@@ -216,33 +223,6 @@
       </tr>
     </tbody>
   </table>
-
-  <!--
-      <td class="play">
-        <a><audio
-            src="bitte1.mp4"></audio>▶</a>
-
-        <br>
-        <a><audio
-            src="liebe.mp4"></audio>▶</a>
-        <br>
-        <a><audio
-            src="baesse.mp4"></audio>▶</a>
-      </td>
-
-      <td class="play">
-        <a><audio
-            src="bitter1.mp4"></audio>▶</a>
-        <br>
-        <a><audio
-            src="lieber.mp4"></audio>▶</a>
-        <br>
-        <a><audio
-            src="besser.mp4"></audio>▶</a>
-      </td>
-
--->
-
 </body>
 
 </html>
