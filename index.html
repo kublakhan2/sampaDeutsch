@@ -5,64 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:image/png;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="style.css">
+  <script async src="playback.js"></script>
   <title>Deutsche Vokale</title>
-  <style>
-    table {
-      width: 100%;
-      max-width: 800px;
-      font-size: 150%;
-    }
-
-    th {
-      font-weight: normal;
-    }
-
-    tbody th,
-    td {
-      padding-top: 10px;
-    }
-
-    tbody th {
-      padding-left: 10px;
-      color: rgb(255, 0, 0);
-      text-align: right;
-    }
-
-    tbody td {
-      color: rgb(0, 0, 255);
-      text-align: left;
-      font-size: smaller;
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const anchors = document.querySelectorAll("a");
-      anchors.forEach(anchor => {
-        anchor.addEventListener('click', play, false)
-      });
-    });
-
-    async function highlight(e) {
-      e.style.fontWeight = 'bold';
-      await new Promise(r => setTimeout(r, 600));
-      e.style.fontWeight = 'normal';
-    }
-
-    async function play(e) {
-      const anchor = e.currentTarget;
-      const audio = anchor.firstChild;
-      console.log(`"${anchor.innerText}" wants to play ${audio.src}`);
-      audio.play().then(
-        () => { highlight(anchor) }, // fulfilled
-        () => { console.log('playback error'); } // rejected
-      );
-    }
-  </script>
 </head>
 
 <body>
 
-  <p>Auf Wort klicken, um Tonbeispiel abzuspielen.</p>
+  <p class="animated">Auf Wort klicken, um Tonbeispiel abzuspielen.</p>
 
   <table>
     <thead>
