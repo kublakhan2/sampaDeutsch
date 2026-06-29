@@ -1,5 +1,3 @@
-/*eslint semi: ["error", "always"]*/
-
 // https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 if (document.readyState === "loading") {
   // Loading hasn't finished yet
@@ -11,9 +9,12 @@ if (document.readyState === "loading") {
 
 function setup_anchors() {
   console.info("DOM loaded");
-  document.querySelectorAll("a").forEach(anchor => {
+  document.querySelectorAll("a").forEach((anchor) => {
     anchor.addEventListener('click', play);
-    
+    anchor.addEventListener('animationend', () => {
+      anchor.classList.remove('animated');
+      console.info(`animation ended on "${anchor.innerText}"`);
+    });
   });
 }
 
@@ -22,15 +23,7 @@ function play(event) {
   const audio = anchor.firstChild;
   console.info(`"${anchor.innerText}" wants to play ${audio.src}`);
   audio.play().then(
-    () => { highlight(anchor); }, // fulfilled
-    () => { console.error('playback error'); } // rejected
+    () => anchor.classList.add('animated'), // fulfilled
+    () => console.error('playback error')   // rejected
   );
-}
-
-function highlight(anchor) {
-  anchor.addEventListener("animationend", () => {
-    anchor.classList.remove('animated');
-    console.info(`animation ended on "${anchor.innerText}"`);
-  });
-  anchor.classList.add('animated');
 }
