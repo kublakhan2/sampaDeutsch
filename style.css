@@ -32,7 +32,7 @@ tbody td {
 
 .animated {
   animation-name: playback_animation;
-  animation-duration: .8s;
+  animation-duration: 1s;
   animation-timing-function: ease-out;
 }
 
