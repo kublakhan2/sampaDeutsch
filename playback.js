@@ -9,7 +9,7 @@ if (document.readyState === "loading") {
 
 function setup_anchors() {
   console.info("DOM loaded");
-  document.querySelectorAll("a").forEach((anchor) => {
+  document.querySelectorAll("a.audio").forEach((anchor) => {
     anchor.addEventListener('click', play);
     anchor.addEventListener('animationend', () => {
       anchor.classList.remove('animated');
